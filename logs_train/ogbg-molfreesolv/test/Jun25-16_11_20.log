@@ -1,0 +1,17 @@
+Jun25-16:11:20
+----------------------------------------------------------------------------------------------------
+[ogbg-molfreesolv]   init=deg (10)   seed=42   batch_size=128
+----------------------------------------------------------------------------------------------------
+lr=0.005 schedule=True ema=0.999 epochs=500 reduce=False eps=1e-05
+(ScoreNetworkX)+(ScoreNetworkA=GCN,4)   : depth=2 adim=16 nhid=16 layers=5 linears=2 c=(2 8 4)
+(x:VP)=(0.10, 1.00) N=1000 (adj:VP)=(0.10, 1.00) N=1000
+----------------------------------------------------------------------------------------------------
+001 | 3.59s | test x: 3.076e+01 | test adj: 1.915e+01 | train x: 3.911e+01 | train adj: 3.665e+01 | 
+002 | 2.11s | test x: 2.292e+01 | test adj: 1.958e+01 | train x: 2.851e+01 | train adj: 2.694e+01 | 
+003 | 2.13s | test x: 1.826e+01 | test adj: 1.973e+01 | train x: 1.938e+01 | train adj: 2.395e+01 | 
+004 | 2.10s | test x: 1.276e+01 | test adj: 1.916e+01 | train x: 1.606e+01 | train adj: 2.234e+01 | 
+005 | 2.10s | test x: 1.245e+01 | test adj: 1.686e+01 | train x: 1.266e+01 | train adj: 2.188e+01 | 
+006 | 2.09s | test x: 1.399e+01 | test adj: 2.199e+01 | train x: 1.301e+01 | train adj: 2.250e+01 | 
+007 | 2.10s | test x: 1.010e+01 | test adj: 1.589e+01 | train x: 1.140e+01 | train adj: 2.040e+01 | 
+008 | 2.16s | test x: 1.203e+01 | test adj: 1.687e+01 | train x: 1.183e+01 | train adj: 2.009e+01 | 
+009 | 2.09s | test x: 1.170e+01 | test adj: 1.725e+01 | train x: 1.296e+01 | train adj: 2.145e+01 | 
