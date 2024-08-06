@@ -24,8 +24,12 @@ class ScoreNetworkX(torch.nn.Module):
                 self.layers.append(DenseGCNConv(self.nhid, self.nhid))
 
         self.fdim = self.nfeat + self.depth * self.nhid
+        # print(self.fdim)
         self.final = MLP(num_layers=3, input_dim=self.fdim, hidden_dim=2*self.fdim, output_dim=self.nfeat, 
                             use_bn=False, activate_func=F.elu)
+
+
+        # print(self.nfeat)
 
         self.activation = torch.tanh
 

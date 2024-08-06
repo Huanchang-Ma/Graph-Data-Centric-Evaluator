@@ -11,7 +11,7 @@ from utils.smile_to_graph import GGNNPreprocessor
 
 
 parser = argparse.ArgumentParser(description='')
-parser.add_argument('--dataset', type=str, default='ZINC250k', choices=['ZINC250k', 'QM9','ogbg-molfreesolv','ogbg-molbace'])
+parser.add_argument('--dataset', type=str, default='ZINC250k', choices=['ZINC250k', 'QM9','ogbg-molfreesolv','ogbg-molbace','molbace-generation','molfreesolv-generation'])
 args = parser.parse_args()
 
 start_time = time.time()
@@ -35,6 +35,16 @@ elif data_name == 'ogbg-molfreesolv':
 elif data_name == 'ogbg-molbace':
     max_atoms = 97
     path = 'data/ogbg-molbace.csv'
+    smiles_col = 'smiles'
+    label_idx = 1
+elif data_name == 'molbace-generation':
+    max_atoms = 45    #通过Max_atoms_num.py得到最大原子数
+    path = 'data/molbace-generation.csv'
+    smiles_col = 'smiles'
+    label_idx = 1
+elif data_name == 'molfreesolv-generation':
+    max_atoms = 20    #通过Max_atoms_num.py得到最大原子数
+    path = 'data/molfreesolv-generation.csv'
     smiles_col = 'smiles'
     label_idx = 1
 

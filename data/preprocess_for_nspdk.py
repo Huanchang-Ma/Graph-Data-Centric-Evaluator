@@ -10,7 +10,7 @@ from utils.mol_utils import mols_to_nx, smiles_to_mols
 
 
 parser = argparse.ArgumentParser(description='')
-parser.add_argument('--dataset', type=str, default='ZINC250k', choices=['ZINC250k', 'QM9','ogbg-molfreesolv','ogbg-molbace'])
+parser.add_argument('--dataset', type=str, default='ZINC250k', choices=['ZINC250k', 'QM9','ogbg-molfreesolv','ogbg-molbace','molbace-generation','molfreesolv-generation'])
 args = parser.parse_args()
 
 dataset = args.dataset
@@ -28,6 +28,10 @@ elif dataset == 'ZINC250k':
 elif dataset == 'ogbg-molfreesolv':
     col = 'smiles'
 elif dataset == 'ogbg-molbace':
+    col = 'smiles'
+elif dataset == 'molbace-generation':
+    col = 'smiles'
+elif dataset == 'molfreesolv-generation':
     col = 'smiles'
 
 else:

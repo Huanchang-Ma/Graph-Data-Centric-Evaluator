@@ -46,7 +46,14 @@ def load_smiles(dataset='QM9'):
         test_idx = test_idx['valid_idxs']
         test_idx = [int(i) for i in test_idx]
 
-    train_idx = [i for i in range(len(df)) if i not in test_idx]
+    # train_idx = [i for i in range(len(df)) if i not in test_idx]
+    if dataset == 'QM9':
+        train_idx = [i for i in range(len(mols)) if i not in test_idx]
+    elif dataset == 'ZINC250k':
+        train_idx = [i for i in range(len(mols)) if i not in test_idx]
+    elif dataset == 'ogbg-molfreesolv' or dataset == 'ogbg-molbace':
+        with open(f'data/train_idx_{dataset.lower()}.json') as f1:
+            train_idx = json.load(f1)
 
     return list(df[col].loc[train_idx]), list(df[col].loc[test_idx])
 
@@ -58,8 +65,8 @@ def gen_mol(x, adj, dataset, largest_connected_comp=True):
 
     if dataset == 'QM9':
         atomic_num_list = [6, 7, 8, 9, 0]
-    elif dataset == 'ogbg-molfreesolv':
-        atomic_num_list = [6, 7, 8, 9, 15, 16, 17, 35, 53, 0]  # Adjust based on your dataset
+    elif dataset == 'ogbg-molbace':
+        atomic_num_list = [6, 7, 8, 9, 16, 17, 35, 53, 0]  # Adjust based on your dataset
     else:
         atomic_num_list = [6, 7, 8, 9, 15, 16, 17, 35, 53, 0]
 

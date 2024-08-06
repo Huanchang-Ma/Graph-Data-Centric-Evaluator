@@ -5,7 +5,8 @@ data:
   batch_size: 152    #测试图包含152个
   test_split: 0.1
   max_node_num: 97
-  max_feat_num: 9
+  #max_feat_num: 9
+  max_feat_num: 8
   init: atom
 
 sde:

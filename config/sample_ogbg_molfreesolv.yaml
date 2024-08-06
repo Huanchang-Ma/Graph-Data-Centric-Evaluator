@@ -2,14 +2,15 @@ data:
   data: ogbg-molfreesolv
   dir: './data'
 
-ckpt: Jul19-10:51:29
+#ckpt: Jul19-10:51:29
+ckpt: Aug06-10:08:17
 
 sampler:
   predictor: Reverse
   corrector: Langevin
-  snr: 0.6
+  snr: 0.3
   #snr: 0.2
-  scale_eps: 0.7
+  scale_eps: 0.5
   #scale_eps: 0.7
   n_steps: 1
 

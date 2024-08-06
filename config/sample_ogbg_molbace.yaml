@@ -2,15 +2,18 @@ data:
   data: ogbg-molbace
   dir: './data'
 
-ckpt: Jul19-10:59:30
+#ckpt: Jul19-10:59:30
+#ckpt: Aug01-12:46:20
+#ckpt: Aug02-13:13:10
+ckpt: Aug02-16:17:12
 
 sampler:
   predictor: Reverse
   corrector: Langevin
   #snr: 0.2
-  snr: 0.8
+  snr: 0.9
+  scale_eps: 0.6
   #scale_eps: 0.7
-  scale_eps: 0.9
   n_steps: 1
 
 sample:
