@@ -10,7 +10,7 @@ from utils.mol_utils import mols_to_nx, smiles_to_mols
 
 
 parser = argparse.ArgumentParser(description='')
-parser.add_argument('--dataset', type=str, default='ZINC250k', choices=['ZINC250k', 'QM9','ogbg-molfreesolv','ogbg-molbace','molbace-generation','molfreesolv-generation'])
+parser.add_argument('--dataset', type=str, default='ZINC250k', choices=['ZINC250k', 'QM9','ogbg-molfreesolv','ogbg-molbace','ogbg-molbbbp','ogbg-molhiv','ogbg-molclintox'])
 args = parser.parse_args()
 
 dataset = args.dataset
@@ -29,10 +29,18 @@ elif dataset == 'ogbg-molfreesolv':
     col = 'smiles'
 elif dataset == 'ogbg-molbace':
     col = 'smiles'
-elif dataset == 'molbace-generation':
+elif dataset == 'ogbg-molbbbp':
     col = 'smiles'
-elif dataset == 'molfreesolv-generation':
+elif dataset == 'ogbg-molhiv':
     col = 'smiles'
+elif dataset == 'ogbg-molclintox':
+    col = 'smiles'
+
+
+#elif dataset == 'molbace-generation':
+#    col = 'smiles'
+#elif dataset == 'molfreesolv-generation':
+#    col = 'smiles'
 
 else:
     raise ValueError(f"[ERROR] Unexpected value data_name={dataset}")

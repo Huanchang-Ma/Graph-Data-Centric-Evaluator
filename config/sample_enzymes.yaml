@@ -1,0 +1,22 @@
+data:
+  data: ENZYMES
+  dir: './data'
+
+ckpt: Aug24-09:06:44   #snr:0.3  scale_eps:0.6
+#ckpt: gdss_enzymes      #snr:0.15  scale_eps:0.7
+
+sampler:
+  predictor: S4
+  corrector: None
+  #snr: 0.15
+  snr: 0.3
+  scale_eps: 0.6
+  #scale_eps: 0.7
+  n_steps: 1
+
+sample:
+  use_ema: True
+  noise_removal: True
+  probability_flow: False
+  eps: 1.0e-4
+  seed: 12

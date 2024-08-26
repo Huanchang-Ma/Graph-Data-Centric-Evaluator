@@ -8,9 +8,13 @@ from rdkit import Chem, RDLogger
 
 RDLogger.DisableLog('rdApp.*')
 
-ATOM_VALENCY = {6: 4, 7: 3, 8: 2, 9: 1, 15: 3, 16: 2, 17: 1, 35: 1, 53: 1}
+#ATOM_VALENCY = {6: 4, 7: 3, 8: 2, 9: 1, 15: 3, 16: 2, 17: 1, 35: 1, 53: 1}
 bond_decoder = {1: Chem.rdchem.BondType.SINGLE, 2: Chem.rdchem.BondType.DOUBLE, 3: Chem.rdchem.BondType.TRIPLE}
-AN_TO_SYMBOL = {6: 'C', 7: 'N', 8: 'O', 9: 'F', 15: 'P', 16: 'S', 17: 'Cl', 35: 'Br', 53: 'I'}
+#AN_TO_SYMBOL = {6: 'C', 7: 'N', 8: 'O', 9: 'F', 15: 'P', 16: 'S', 17: 'Cl', 35: 'Br', 53: 'I'}
+
+
+ATOM_VALENCY = {6: 4, 7: 3, 8: 2, 9: 1, 15: 3, 16: 2, 17: 1, 35: 1, 53: 1, 1: 1, 11: 1, 20: 2, 5: 3, 29: 2, 30: 2, 27: 3, 25: 3, 33: 3, 13: 3, 28: 2, 34: 2, 14: 2, 40: 2, 50: 2, 3: 3, 51: 3, 26: 4, 46: 2, 80: 2, 83: 3, 22: 2, 67: 3, 32: 2, 78: 2, 44: 2, 45: 3, 24: 4, 31: 3, 19: 1, 47: 1, 79: 1, 65: 4, 77: 1, 52: 2, 12: 2, 82: 2, 74: 4, 55: 3, 42: 2, 75: 3, 92: 4, 64: 2, 81: 3, 89: 1, 43: 3}
+AN_TO_SYMBOL = { 1: 'H', 2: 'He', 3: 'Li', 4: 'Be', 5: 'B', 6: 'C', 7: 'N', 8: 'O', 9: 'F', 10: 'Ne', 11: 'Na', 12: 'Mg', 13: 'Al', 14: 'Si', 15: 'P', 16: 'S', 17: 'Cl', 18: 'Ar', 19: 'K', 20: 'Ca', 21: 'Sc', 22: 'Ti', 23: 'V', 24: 'Cr', 25: 'Mn', 26: 'Fe', 27: 'Co', 28: 'Ni', 29: 'Cu', 30: 'Zn', 31: 'Ga', 32: 'Ge', 33: 'As', 34: 'Se', 35: 'Br', 36: 'Kr', 37: 'Rb', 38: 'Sr', 39: 'Y', 40: 'Zr', 41: 'Nb', 42: 'Mo', 43: 'Tc', 44: 'Ru', 45: 'Rh', 46: 'Pd', 47: 'Ag', 48: 'Cd', 49: 'In', 50: 'Sn', 51: 'Sb', 52: 'Te', 53: 'I', 54: 'Xe', 55: 'Cs', 56: 'Ba', 57: 'La', 58: 'Ce', 59: 'Pr', 60: 'Nd', 61: 'Pm', 62: 'Sm', 63: 'Eu', 64: 'Gd', 65: 'Tb', 66: 'Dy', 67: 'Ho', 68: 'Er', 69: 'Tm', 70: 'Yb', 71: 'Lu', 72: 'Hf', 73: 'Ta', 74: 'W', 75: 'Re', 76: 'Os', 77: 'Ir', 78: 'Pt', 79: 'Au', 80: 'Hg', 81: 'Tl', 82: 'Pb', 83: 'Bi', 84: 'Po', 85: 'At', 86: 'Rn', 87: 'Fr', 88: 'Ra', 89: 'Ac', 90: 'Th', 91: 'Pa', 92: 'U', 93: 'Np', 94: 'Pu', 95: 'Am', 96: 'Cm', 97: 'Bk', 98: 'Cf', 99: 'Es', 100: 'Fm', 101: 'Md', 102: 'No', 103: 'Lr', 104: 'Rf', 105: 'Db', 106: 'Sg', 107: 'Bh', 108: 'Hs', 109: 'Mt', 110: 'Ds', 111: 'Rg', 112: 'Cn', 113: 'Nh', 114: 'Fl', 115: 'Mc', 116: 'Lv', 117: 'Ts', 118: 'Og'}
 
 
 def mols_to_smiles(mols):
@@ -34,6 +38,12 @@ def load_smiles(dataset='QM9'):
         col = 'smiles'
     elif dataset == 'ogbg-molbace':
         col = 'smiles'
+    elif dataset == 'ogbg-molbbbp':
+        col = 'smiles'
+    elif dataset == 'ogbg-molhiv':
+        col = 'smiles'
+    elif dataset == 'ogbg-molclintox':
+        col = 'smiles'
     else:
         raise ValueError('wrong dataset name in load_smiles')
 
@@ -51,7 +61,7 @@ def load_smiles(dataset='QM9'):
         train_idx = [i for i in range(len(mols)) if i not in test_idx]
     elif dataset == 'ZINC250k':
         train_idx = [i for i in range(len(mols)) if i not in test_idx]
-    elif dataset == 'ogbg-molfreesolv' or dataset == 'ogbg-molbace':
+    elif dataset == 'ogbg-molfreesolv' or dataset == 'ogbg-molbace' or dataset == 'ogbg-molbbbp' or dataset == 'ogbg-molhiv' or dataset == 'ogbg-molclintox':
         with open(f'data/train_idx_{dataset.lower()}.json') as f1:
             train_idx = json.load(f1)
 
@@ -67,6 +77,12 @@ def gen_mol(x, adj, dataset, largest_connected_comp=True):
         atomic_num_list = [6, 7, 8, 9, 0]
     elif dataset == 'ogbg-molbace':
         atomic_num_list = [6, 7, 8, 9, 16, 17, 35, 53, 0]  # Adjust based on your dataset
+    elif dataset == 'ogbg-molbbbp':
+        atomic_num_list = [17, 6, 7, 8, 9, 16, 35, 53, 1, 11, 15, 20, 5, 0]
+    elif dataset == 'ogbg-molhiv':
+        atomic_num_list =  [6, 8, 29, 7, 16, 15, 17, 30, 5, 35, 27, 25, 33, 13, 28, 34, 14, 23, 40, 50, 53, 9, 3, 51, 26, 46, 80, 83, 11, 20, 22, 1, 67, 32, 78, 44, 45, 24, 31, 19, 47, 79, 65, 77, 52, 12, 82, 74, 55, 42, 75, 92, 64, 81, 89, 0]
+    elif dataset == 'ogbg-molclintox':
+        atomic_num_list =  [6, 17, 8, 1, 7, 43, 15, 9, 16, 34, 5, 26, 13, 35, 53, 20, 78, 83, 79, 81, 24, 29, 25, 30, 14, 80, 33, 22, 0]
     else:
         atomic_num_list = [6, 7, 8, 9, 15, 16, 17, 35, 53, 0]
 

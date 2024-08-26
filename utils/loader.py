@@ -118,7 +118,7 @@ def dataloader(config, get_graph_list=False):
 
 
 def load_data(config, get_graph_list=False):
-    if config.data.data in ['QM9', 'ZINC250k', 'ogbg-molfreesolv','ogbg-molbace']:
+    if config.data.data in ['QM9', 'ZINC250k', 'ogbg-molfreesolv','ogbg-molbace','ogbg-molbbbp','ogbg-molhiv','ogbg-molclintox']:
         from utils.data_loader_mol import dataloader
         return dataloader(config, get_graph_list)
     else:

@@ -47,7 +47,8 @@ train:
   lr_decay: 0.999
   eps: 1.0e-5
 
-sampler:
+
+ampler:
   predictor: S4
   corrector: None
   snr: 0.15

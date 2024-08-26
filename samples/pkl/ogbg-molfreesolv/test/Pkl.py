@@ -4,7 +4,7 @@ import networkx as nx
 #with open('grid.pkl', 'rb') as f:
   #  graphs = pickle.load(f)
 
-with open('Jun11-14:03:38-sample.pkl', 'rb') as f:
+with open('Jul19-10:51:29-sample.pkl', 'rb') as f:
     graphs = pickle.load(f)
 
 if isinstance(graphs, list):

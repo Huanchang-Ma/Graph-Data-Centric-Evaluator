@@ -11,7 +11,7 @@ from utils.smile_to_graph import GGNNPreprocessor
 
 
 parser = argparse.ArgumentParser(description='')
-parser.add_argument('--dataset', type=str, default='ZINC250k', choices=['ZINC250k', 'QM9','ogbg-molfreesolv','ogbg-molbace','molbace-generation','molfreesolv-generation'])
+parser.add_argument('--dataset', type=str, default='ZINC250k', choices=['ZINC250k', 'QM9','ogbg-molfreesolv','ogbg-molbace','ogbg-molbbbp','ogbg-molhiv','ogbg-molclintox'])
 args = parser.parse_args()
 
 start_time = time.time()
@@ -37,16 +37,32 @@ elif data_name == 'ogbg-molbace':
     path = 'data/ogbg-molbace.csv'
     smiles_col = 'smiles'
     label_idx = 1
-elif data_name == 'molbace-generation':
-    max_atoms = 45    #通过Max_atoms_num.py得到最大原子数
-    path = 'data/molbace-generation.csv'
+elif data_name == 'ogbg-molbbbp':
+    max_atoms = 132
+    path = 'data/ogbg-molbbbp.csv'
     smiles_col = 'smiles'
-    label_idx = 1
-elif data_name == 'molfreesolv-generation':
-    max_atoms = 20    #通过Max_atoms_num.py得到最大原子数
-    path = 'data/molfreesolv-generation.csv'
+    label_idx = 0
+elif data_name == 'ogbg-molhiv':
+    max_atoms = 222
+    path = 'data/ogbg-molhiv.csv'
     smiles_col = 'smiles'
-    label_idx = 1
+    label_idx = 0
+elif data_name == 'ogbg-molclintox':
+    max_atoms = 136
+    path = 'data/ogbg-molclintox.csv'
+    smiles_col = 'smiles'
+    label_idx = (0, 1)
+
+# elif data_name == 'molbace-generation':
+#     max_atoms = 45    #通过Max_atoms_num.py得到最大原子数
+#     path = 'data/molbace-generation.csv'
+#     smiles_col = 'smiles'
+#     label_idx = 1
+# elif data_name == 'molfreesolv-generation':
+#     max_atoms = 20    #通过Max_atoms_num.py得到最大原子数
+#     path = 'data/molfreesolv-generation.csv'
+#     smiles_col = 'smiles'
+#     label_idx = 1
 
 else:
     raise ValueError(f"[ERROR] Unexpected value data_name={data_name}")
