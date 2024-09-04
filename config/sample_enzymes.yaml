@@ -2,15 +2,17 @@ data:
   data: ENZYMES
   dir: './data'
 
-ckpt: Aug24-09:06:44   #snr:0.3  scale_eps:0.6
+#ckpt: Aug24-09:06:44   #snr:0.3  scale_eps:0.6
 #ckpt: gdss_enzymes      #snr:0.15  scale_eps:0.7
+ckpt: Sep04-08:00:02
+
 
 sampler:
   predictor: S4
   corrector: None
   #snr: 0.15
-  snr: 0.3
-  scale_eps: 0.6
+  snr: 0.2
+  scale_eps: 0.7
   #scale_eps: 0.7
   n_steps: 1
 

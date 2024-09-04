@@ -2,10 +2,7 @@ data:
   data: ogbg-molclintox
   dir: './data'
 
-#ckpt: Jul19-10:59:30
-#ckpt: Aug01-12:46:20
-#ckpt: Aug02-13:13:10
-ckpt: Aug02-16:17:12
+ckpt: Aug30-08:20:13
 
 sampler:
   predictor: Reverse

@@ -120,11 +120,16 @@ def gen_graph_list(graph_type='grid', possible_params_dict=None, corrupt_func=No
     return graph_list
 
 
-def load_dataset(data_dir='data', file_name=None, need_set=False):
+# def load_dataset(data_dir='data', file_name=None, need_set=False):
+#     file_path = os.path.join(data_dir, file_name)
+#     with open(file_path + '.pkl', 'rb') as f:
+#         graph_list = pickle.load(f)
+#     return graph_list
+def load_dataset(data_dir='data', file_name=None, need_set=False):  ##ENZYMES
     file_path = os.path.join(data_dir, file_name)
-    with open(file_path + '.pkl', 'rb') as f:
+    with open(file_path + '_xin.pkl', 'rb') as f:
         graph_list = pickle.load(f)
-    return graph_list 
+    return graph_list
 
 
 # -------- load ENZYMES, PROTEIN and DD dataset --------
@@ -165,11 +170,13 @@ def graph_load_batch(min_num_nodes=20, max_num_nodes=1000, name='ENZYMES', node_
     graph_num = data_graph_indicator.max()
     node_list = np.arange(data_graph_indicator.shape[0]) + 1
     graphs = []
+    labels = []
     max_nodes = 0
     for i in range(graph_num):
         # -------- find the nodes for each graph --------
         nodes = node_list[data_graph_indicator == i + 1]
-        G_sub = G.subgraph(nodes)
+        # G_sub = G.subgraph(nodes)
+        G_sub = G.subgraph(nodes).copy()
         if graph_labels:
             G_sub.graph['label'] = data_graph_labels[i]
         if min_num_nodes <= G_sub.number_of_nodes() <= max_num_nodes:
@@ -231,17 +238,26 @@ def citeseer_ego(radius=3, node_min=50, node_max=400):
     return graphs
 
 
+# def save_dataset(data_dir, graphs, save_name):
+#     if not os.path.isdir(data_dir):
+#         os.makedirs(data_dir)
+#     file_path = os.path.join('data', save_name)
+#     print(save_name, len(graphs))
+#     with open(file_path + '.pkl', 'wb') as f:
+#         pickle.dump(obj=graphs, file=f, protocol=pickle.HIGHEST_PROTOCOL)
+#     with open(file_path + '.txt', 'w') as f:
+#         f.write(save_name + '\n')
+#         f.write(str(len(graphs)))
 def save_dataset(data_dir, graphs, save_name):
     if not os.path.isdir(data_dir):
         os.makedirs(data_dir)
     file_path = os.path.join('data', save_name)
     print(save_name, len(graphs))
-    with open(file_path + '.pkl', 'wb') as f:
+    with open(file_path + '_xin.pkl', 'wb') as f:
         pickle.dump(obj=graphs, file=f, protocol=pickle.HIGHEST_PROTOCOL)
-    with open(file_path + '.txt', 'w') as f:
+    with open(file_path + '_xin.txt', 'w') as f:
         f.write(save_name + '\n')
         f.write(str(len(graphs)))
-
 
 # -------- Generate datasets --------
 def generate_dataset(data_dir='data', dataset='community_small'):
@@ -292,7 +308,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Generate dataset')
     parser.add_argument('--data-dir', type=str, default='data', help='directory to save the generated dataset')
-    parser.add_argument('--dataset', type=str, default='community_small', help='dataset to generate',
+    parser.add_argument('--dataset', type=str, default='ENZYMES', help='dataset to generate',
                         choices=['ego_small', 'community_small', 'ENZYMES', 'grid'])
     args = parser.parse_args()
     generate_dataset(args.data_dir, args.dataset)

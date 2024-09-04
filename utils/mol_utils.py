@@ -44,6 +44,12 @@ def load_smiles(dataset='QM9'):
         col = 'smiles'
     elif dataset == 'ogbg-molclintox':
         col = 'smiles'
+    elif dataset == 'ogbg-moltoxcast':
+        col = 'smiles'
+    elif dataset == 'ogbg-moltox21':
+        col = 'smiles'
+    elif dataset == 'ogbg-molsider':
+        col = 'smiles'
     else:
         raise ValueError('wrong dataset name in load_smiles')
 
@@ -61,7 +67,7 @@ def load_smiles(dataset='QM9'):
         train_idx = [i for i in range(len(mols)) if i not in test_idx]
     elif dataset == 'ZINC250k':
         train_idx = [i for i in range(len(mols)) if i not in test_idx]
-    elif dataset == 'ogbg-molfreesolv' or dataset == 'ogbg-molbace' or dataset == 'ogbg-molbbbp' or dataset == 'ogbg-molhiv' or dataset == 'ogbg-molclintox':
+    elif dataset == 'ogbg-molfreesolv' or dataset == 'ogbg-molbace' or dataset == 'ogbg-molbbbp' or dataset == 'ogbg-molhiv' or dataset == 'ogbg-molclintox' or dataset == 'ogbg-moltoxcast' or dataset == 'ogbg-moltox21' or dataset == 'ogbg-molsider':
         with open(f'data/train_idx_{dataset.lower()}.json') as f1:
             train_idx = json.load(f1)
 
@@ -83,6 +89,12 @@ def gen_mol(x, adj, dataset, largest_connected_comp=True):
         atomic_num_list =  [6, 8, 29, 7, 16, 15, 17, 30, 5, 35, 27, 25, 33, 13, 28, 34, 14, 23, 40, 50, 53, 9, 3, 51, 26, 46, 80, 83, 11, 20, 22, 1, 67, 32, 78, 44, 45, 24, 31, 19, 47, 79, 65, 77, 52, 12, 82, 74, 55, 42, 75, 92, 64, 81, 89, 0]
     elif dataset == 'ogbg-molclintox':
         atomic_num_list =  [6, 17, 8, 1, 7, 43, 15, 9, 16, 34, 5, 26, 13, 35, 53, 20, 78, 83, 79, 81, 24, 29, 25, 30, 14, 80, 33, 22, 0]
+    elif dataset == 'ogbg-moltoxcast':
+        atomic_num_list =  [8, 7, 6, 17, 14, 35, 56, 60, 66, 49, 15, 51, 27, 16, 19, 11, 5, 20, 80, 28, 34, 81, 48, 9, 26, 3, 70, 53, 24, 50, 30, 29, 82, 33, 83, 1, 64, 23, 25, 79, 22, 40, 42, 12, 63, 13, 78, 38, 21, 47, 46, 4, 32, 0]
+    elif dataset == 'ogbg-moltox21':
+        atomic_num_list =  [6, 8, 7, 16, 15, 17, 53, 30, 9, 20, 33, 35, 5, 1, 19, 14, 29, 12, 80, 24, 40, 50, 11, 56, 79, 46, 81, 26, 13, 64, 47, 42, 23, 60, 27, 70, 82, 51, 49, 3, 28, 83, 48, 22, 34, 66, 25, 38, 4, 78, 32, 0]
+    elif dataset == 'ogbg-molsider':
+        atomic_num_list =  [6, 7, 8, 16, 17, 9, 81, 53, 20, 15, 1, 64, 11, 19, 12, 32, 35, 26, 79, 56, 38, 33, 34, 78, 27, 3, 5, 88, 49, 25, 57, 47, 30, 43, 98, 31, 62, 24, 29, 39, 0]
     else:
         atomic_num_list = [6, 7, 8, 9, 15, 16, 17, 35, 53, 0]
 

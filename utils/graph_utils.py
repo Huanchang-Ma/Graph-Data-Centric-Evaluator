@@ -178,6 +178,16 @@ def graphs_to_tensor(graph_list, max_node_num):
     max_node_num = max_node_num
 
     for g in graph_list:
+        #print(type(g))
+        #print(g)
+        #print(1)
+        #print(type(nx.Graph))
+        #print(2)
+        #import sys
+        #if not isinstance(g, nx.Graph):
+        #    sys.exit("g 不是 nx.Graph 类型")
+        #else:
+        #    print("g 是 nx.Graph 类型")
         assert isinstance(g, nx.Graph)
         node_list = []
         for v, feature in g.nodes.data('feature'):

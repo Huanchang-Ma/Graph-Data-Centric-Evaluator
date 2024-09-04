@@ -1,5 +1,5 @@
 data: 
-  data: ogbg-molbace
+  data: ogbg-molclintox
   dir: './data'
   #batch_size: 128   #ckpt: Jul19-10:59:30
   batch_size: 148    #生成与测试图数相同的分子图

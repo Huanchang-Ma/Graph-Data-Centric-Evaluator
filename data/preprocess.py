@@ -11,7 +11,7 @@ from utils.smile_to_graph import GGNNPreprocessor
 
 
 parser = argparse.ArgumentParser(description='')
-parser.add_argument('--dataset', type=str, default='ZINC250k', choices=['ZINC250k', 'QM9','ogbg-molfreesolv','ogbg-molbace','ogbg-molbbbp','ogbg-molhiv','ogbg-molclintox'])
+parser.add_argument('--dataset', type=str, default='ZINC250k', choices=['ZINC250k', 'QM9','ogbg-molfreesolv','ogbg-molbace','ogbg-molbbbp','ogbg-molhiv','ogbg-molclintox','ogbg-moltoxcast','ogbg-moltox21','ogbg-molsider'])
 args = parser.parse_args()
 
 start_time = time.time()
@@ -51,7 +51,22 @@ elif data_name == 'ogbg-molclintox':
     max_atoms = 136
     path = 'data/ogbg-molclintox.csv'
     smiles_col = 'smiles'
-    label_idx = (0, 1)
+    label_idx = 1
+elif data_name == 'ogbg-moltoxcast':
+    max_atoms = 124
+    path = 'data/ogbg-moltoxcast.csv'
+    smiles_col = 'smiles'
+    label_idx = 501
+elif data_name == 'ogbg-moltox21':
+    max_atoms = 132
+    path = 'data/ogbg-moltox21.csv'
+    smiles_col = 'smiles'
+    label_idx = 2
+elif data_name == 'ogbg-molsider':
+    max_atoms = 492
+    path = 'data/ogbg-molsider.csv'
+    smiles_col = 'smiles'
+    label_idx = 1
 
 # elif data_name == 'molbace-generation':
 #     max_atoms = 45    #通过Max_atoms_num.py得到最大原子数

@@ -1,0 +1,21 @@
+data:
+  data: ogbg-moltox21
+  dir: './data'
+
+ckpt: Aug31-00:11:49
+
+sampler:
+  predictor: Reverse
+  corrector: Langevin
+  #snr: 0.2
+  snr: 0.9
+  scale_eps: 0.6
+  #scale_eps: 0.7
+  n_steps: 1
+
+sample:
+  use_ema: False
+  noise_removal: True
+  probability_flow: False
+  eps: 1.0e-4
+  seed: 42

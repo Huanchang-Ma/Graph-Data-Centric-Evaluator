@@ -183,6 +183,69 @@ def get_transform_fn(dataset):
             adj = torch.where(adj == 3, 0, adj + 1).to(torch.float32)
             return x, adj
 
+    elif dataset == 'ogbg-moltoxcast':
+        def transform(data):
+            x, adj = data
+            # the last place is for virtual nodes
+            # 6: C, 7: N, 8: O, 9: F, 15: P, 16: S, 17: Cl, 35: Br, 53: I
+            ogbg_moltoxcast_atomic_num_list = [8, 7, 6, 17, 14, 35, 56, 60, 66, 49, 15, 51, 27, 16, 19, 11, 5, 20, 80, 28, 34, 81, 48, 9, 26, 3, 70, 53, 24, 50, 30, 29, 82, 33, 83, 1, 64, 23, 25, 79, 22, 40, 42, 12, 63, 13, 78, 38, 21, 47, 46, 4, 32, 0]
+            x_ = np.zeros((124, 54), dtype=np.float32)
+            for i in range(124):
+                ind = ogbg_moltoxcast_atomic_num_list.index(x[i])
+                x_[i, ind] = 1.
+            x = torch.tensor(x_).to(torch.float32)
+            # single, double, triple and no-bond; the last channel is for virtual edges
+            adj = np.concatenate([adj[:3], 1 - np.sum(adj[:3], axis=0, keepdims=True)],
+                                 axis=0).astype(np.float32)
+
+            x = x[:, :-1]                               # 9, 5 (the last place is for vitual nodes) -> 9, 4 (38, 9)
+            adj = torch.tensor(adj.argmax(axis=0))      # 4, 9, 9 (the last place is for vitual edges) -> 9, 9 (38, 38)
+            # 0, 1, 2, 3 -> 1, 2, 3, 0; now virtual edges are denoted as 0
+            adj = torch.where(adj == 3, 0, adj + 1).to(torch.float32)
+            return x, adj
+
+    elif dataset == 'ogbg-moltox21':
+        def transform(data):
+            x, adj = data
+            # the last place is for virtual nodes
+            # 6: C, 7: N, 8: O, 9: F, 15: P, 16: S, 17: Cl, 35: Br, 53: I
+            ogbg_moltox21_atomic_num_list = [6, 8, 7, 16, 15, 17, 53, 30, 9, 20, 33, 35, 5, 1, 19, 14, 29, 12, 80, 24, 40, 50, 11, 56, 79, 46, 81, 26, 13, 64, 47, 42, 23, 60, 27, 70, 82, 51, 49, 3, 28, 83, 48, 22, 34, 66, 25, 38, 4, 78, 32, 0]
+            x_ = np.zeros((132, 52), dtype=np.float32)
+            for i in range(132):
+                ind = ogbg_moltox21_atomic_num_list.index(x[i])
+                x_[i, ind] = 1.
+            x = torch.tensor(x_).to(torch.float32)
+            # single, double, triple and no-bond; the last channel is for virtual edges
+            adj = np.concatenate([adj[:3], 1 - np.sum(adj[:3], axis=0, keepdims=True)],
+                                 axis=0).astype(np.float32)
+
+            x = x[:, :-1]                               # 9, 5 (the last place is for vitual nodes) -> 9, 4 (38, 9)
+            adj = torch.tensor(adj.argmax(axis=0))      # 4, 9, 9 (the last place is for vitual edges) -> 9, 9 (38, 38)
+            # 0, 1, 2, 3 -> 1, 2, 3, 0; now virtual edges are denoted as 0
+            adj = torch.where(adj == 3, 0, adj + 1).to(torch.float32)
+            return x, adj
+
+    elif dataset == 'ogbg-molsider':
+        def transform(data):
+            x, adj = data
+            # the last place is for virtual nodes
+            # 6: C, 7: N, 8: O, 9: F, 15: P, 16: S, 17: Cl, 35: Br, 53: I
+            ogbg_molsider_atomic_num_list = [6, 7, 8, 16, 17, 9, 81, 53, 20, 15, 1, 64, 11, 19, 12, 32, 35, 26, 79, 56, 38, 33, 34, 78, 27, 3, 5, 88, 49, 25, 57, 47, 30, 43, 98, 31, 62, 24, 29, 39, 0]
+            x_ = np.zeros((492, 41), dtype=np.float32)
+            for i in range(492):
+                ind = ogbg_molsider_atomic_num_list.index(x[i])
+                x_[i, ind] = 1.
+            x = torch.tensor(x_).to(torch.float32)
+            # single, double, triple and no-bond; the last channel is for virtual edges
+            adj = np.concatenate([adj[:3], 1 - np.sum(adj[:3], axis=0, keepdims=True)],
+                                 axis=0).astype(np.float32)
+
+            x = x[:, :-1]                               # 9, 5 (the last place is for vitual nodes) -> 9, 4 (38, 9)
+            adj = torch.tensor(adj.argmax(axis=0))      # 4, 9, 9 (the last place is for vitual edges) -> 9, 9 (38, 38)
+            # 0, 1, 2, 3 -> 1, 2, 3, 0; now virtual edges are denoted as 0
+            adj = torch.where(adj == 3, 0, adj + 1).to(torch.float32)
+            return x, adj
+
 
     # elif dataset == 'ogbg-molbace':  #(ori)
     #     def transform(data):
@@ -256,7 +319,7 @@ def dataloader(config, get_graph_list=False):
         train_idx = [i for i in range(len(mols)) if i not in test_idx]
     elif config.data.data == 'ZINC250k':
         train_idx = [i for i in range(len(mols)) if i not in test_idx]
-    elif config.data.data == 'ogbg-molfreesolv' or config.data.data == 'ogbg-molbace' or config.data.data == 'ogbg-molbbbp' or config.data.data == 'ogbg-molhiv' or config.data.data == 'ogbg-molclintox':
+    elif config.data.data == 'ogbg-molfreesolv' or config.data.data == 'ogbg-molbace' or config.data.data == 'ogbg-molbbbp' or config.data.data == 'ogbg-molhiv' or config.data.data == 'ogbg-molclintox' or config.data.data == 'ogbg-moltoxcast' or config.data.data == 'ogbg-moltox21' or config.data.data == 'ogbg-molsider':
         with open(os.path.join(config.data.dir, f'train_idx_{config.data.data.lower()}.json')) as f1:
             train_idx = json.load(f1)
     # train_idx = [i for i in range(len(mols)) if i not in test_idx]

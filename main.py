@@ -23,7 +23,7 @@ def main(work_type_args):
 
     # -------- Generation --------
     elif work_type_args.type == 'sample':
-        if config.data.data in ['QM9', 'ZINC250k','ogbg-molfreesolv','ogbg-molbace','ogbg-molbbbp','ogbg-molhiv','ogbg-molclintox']:
+        if config.data.data in ['QM9', 'ZINC250k','ogbg-molfreesolv','ogbg-molbace','ogbg-molbbbp','ogbg-molhiv','ogbg-molclintox','ogbg-moltoxcast','ogbg-moltox21','ogbg-molsider']:
         #if config.data.data in ['QM9', 'ZINC250k']:  #能输出'ogbg-molfreesolv','ogbg-molbace'数据集的degree、cluster、orbit以及spectral
             sampler = Sampler_mol(config)
         else:

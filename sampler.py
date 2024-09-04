@@ -62,17 +62,25 @@ class Sampler(object):
         logger.log(f'GEN SEED: {self.config.sample.seed}')
         load_seed(self.config.sample.seed)
 
+        print("Before num_sampling_rounds ")
         num_sampling_rounds = math.ceil(len(self.test_graph_list) / self.configt.data.batch_size)
+        print("After num_sampling_rounds ")
+        # print(num_sampling_rounds)
         gen_graph_list = []
         for r in range(num_sampling_rounds):
             t_start = time.time()
 
+            print("Before init_flags")
             self.init_flags = init_flags(self.train_graph_list, self.configt).to(self.device[0])
+            print("init_flags") ######
             x, adj, _ = self.sampling_fn(self.model_x, self.model_adj, self.init_flags)
+            print("x adj")
 
             logger.log(f"Round {r} : {time.time() - t_start:.2f}s")
 
+            print("samples_int")
             samples_int = quantize(adj)
+            print(samples_int)
             gen_graph_list.extend(adjs_to_graphs(samples_int, True))
 
         gen_graph_list = gen_graph_list[:len(self.test_graph_list)]

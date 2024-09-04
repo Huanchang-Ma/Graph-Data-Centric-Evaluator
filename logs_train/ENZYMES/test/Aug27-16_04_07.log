@@ -1,0 +1,24 @@
+Aug27-16:04:07
+----------------------------------------------------------------------------------------------------
+[ENZYMES]   init=deg (10)   seed=42   batch_size=64
+----------------------------------------------------------------------------------------------------
+lr=0.01 schedule=True ema=0.999 epochs=5000 reduce=False eps=1e-05
+(ScoreNetworkX)+(ScoreNetworkA=GCN,4)   : depth=5 adim=32 nhid=32 layers=7 linears=2 c=(2 8 4)
+(x:VP)=(0.10, 1.00) N=1000 (adj:VE)=(0.20, 1.00) N=1000
+----------------------------------------------------------------------------------------------------
+001 | 1.46s | test x: 8.025e+01 | test adj: 2.886e+02 | train x: 1.306e+02 | train adj: 4.539e+02 | 
+002 | 1.06s | test x: 5.466e+01 | test adj: 2.556e+02 | train x: 8.157e+01 | train adj: 3.318e+02 | 
+003 | 1.12s | test x: 5.632e+01 | test adj: 2.690e+02 | train x: 6.013e+01 | train adj: 2.774e+02 | 
+004 | 1.07s | test x: 4.002e+01 | test adj: 2.012e+02 | train x: 5.797e+01 | train adj: 2.908e+02 | 
+005 | 1.06s | test x: 4.788e+01 | test adj: 1.923e+02 | train x: 5.116e+01 | train adj: 2.294e+02 | 
+006 | 1.06s | test x: 4.505e+01 | test adj: 1.721e+02 | train x: 4.698e+01 | train adj: 2.085e+02 | 
+007 | 1.06s | test x: 4.436e+01 | test adj: 1.562e+02 | train x: 4.954e+01 | train adj: 2.128e+02 | 
+008 | 1.06s | test x: 4.403e+01 | test adj: 1.630e+02 | train x: 4.823e+01 | train adj: 1.932e+02 | 
+009 | 1.09s | test x: 4.337e+01 | test adj: 1.614e+02 | train x: 4.505e+01 | train adj: 2.012e+02 | 
+010 | 1.07s | test x: 3.809e+01 | test adj: 1.544e+02 | train x: 4.195e+01 | train adj: 1.799e+02 | 
+011 | 1.06s | test x: 3.828e+01 | test adj: 1.561e+02 | train x: 3.982e+01 | train adj: 1.684e+02 | 
+012 | 1.06s | test x: 4.157e+01 | test adj: 1.573e+02 | train x: 3.893e+01 | train adj: 1.767e+02 | 
+013 | 1.06s | test x: 3.694e+01 | test adj: 1.486e+02 | train x: 4.029e+01 | train adj: 1.941e+02 | 
+014 | 1.06s | test x: 4.029e+01 | test adj: 1.548e+02 | train x: 3.996e+01 | train adj: 1.798e+02 | 
+015 | 1.06s | test x: 3.819e+01 | test adj: 1.432e+02 | train x: 3.850e+01 | train adj: 1.721e+02 | 
+016 | 1.06s | test x: 3.576e+01 | test adj: 1.487e+02 | train x: 3.875e+01 | train adj: 1.791e+02 | 

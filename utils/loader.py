@@ -118,7 +118,7 @@ def dataloader(config, get_graph_list=False):
 
 
 def load_data(config, get_graph_list=False):
-    if config.data.data in ['QM9', 'ZINC250k', 'ogbg-molfreesolv','ogbg-molbace','ogbg-molbbbp','ogbg-molhiv','ogbg-molclintox']:
+    if config.data.data in ['QM9', 'ZINC250k', 'ogbg-molfreesolv','ogbg-molbace','ogbg-molbbbp','ogbg-molhiv','ogbg-molclintox','ogbg-moltoxcast','ogbg-moltox21','ogbg-molsider']:
         from utils.data_loader_mol import dataloader
         return dataloader(config, get_graph_list)
     else:
@@ -131,6 +131,12 @@ def load_batch(batch, device):
     x_b = batch[0].to(device_id)
     adj_b = batch[1].to(device_id)
     return x_b, adj_b
+# def load_batch(batch, device):
+#     device_id = f'cuda:{device[0]}' if isinstance(device, list) else device
+#     x_b = batch[0].to(device_id)
+#     adj_b = batch[1].to(device_id)
+#     y_b = batch[2].to(device_id)
+#     return x_b, adj_b, y_b
 
 
 def load_sde(config_sde):
